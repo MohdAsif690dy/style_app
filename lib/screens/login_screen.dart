@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                Text("Password",style: TextStyle(fontSize: 25,color: Colors.orange),),
-                TextField(
+                TextFormField(
                     decoration: InputDecoration(
                       //labelText: "Password",
                         labelStyle: TextStyle(
