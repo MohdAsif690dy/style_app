@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:style_app/screens/home_screen.dart';
 import 'package:style_app/screens/login_screen.dart';
 
 void main() => runApp(MyApp());
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CitiTrends',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black
+        scaffoldBackgroundColor: Colors.black,
       ),
-      home: LoginScreen(),
+      home: HomeScreen(),
     );
   }
 }

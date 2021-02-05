@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      //appBar: Image.asset("assets/images/logo1.svg"),
       //backgroundColor: Colors.black,
       body:
         //height: MediaQuery
@@ -29,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
        // padding: EdgeInsets.only(top: 30),
          Column(
           children: [Padding(padding: EdgeInsets.only(top: 30)),
-            Image.asset("assets/images/logo.png"),
+            SvgPicture.asset("assets/images/logo1.svg",height: 100,width: MediaQuery.of(context).size.width,),
             Container(
               color: Colors.white,
              //height: 400,
@@ -80,12 +82,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ))),
                Padding(padding: EdgeInsets.only(bottom: 7),),
                Text("Remember Me",style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic,color: Colors.orange)),
+                //Switch(va, onChanged: null)
                 Padding(padding: EdgeInsets.only(top: 5)),
+               //Switch(value: false),// onChanged: null)
                Divider(
                  color: Colors.black,
                ),
                //TextField(),
                Text("Advanced Settings",style: TextStyle(fontSize: 20,fontStyle: FontStyle.italic,color: Colors.orange),),
+               //Switch(value: false)//, onChanged: false)
                // Switch(value: false, onChanged: value(Container()) ) //value(Container container);
             ]),
     ),
