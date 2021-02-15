@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:style_app/db/auth.dart';
+import 'package:style_app/screens/home_screen.dart';
+import 'package:style_app/screens/market_place.dart';
+import 'package:style_app/screens/navigation_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,10 +18,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isVisible = true;
+  bool isRemember = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      //appBar: ,
       //appBar: Image.asset("assets/images/logo1.svg"),
       //backgroundColor: Colors.black,
       body:
@@ -30,22 +38,26 @@ class _LoginScreenState extends State<LoginScreen> {
             //.width,
        // padding: EdgeInsets.only(top: 30),
          Column(
-          children: [Padding(padding: EdgeInsets.only(top: 30)),
-            SvgPicture.asset("assets/images/logo1.svg",height: 100,width: MediaQuery.of(context).size.width,),
+          children: [Padding(padding: EdgeInsets.only(top: 20)),
+            SvgPicture.asset("assets/images/logo1.svg",
+              height: 100,width: MediaQuery.of(context).size.width,),
             Container(
               color: Colors.white,
              //height: 400,
-              height: MediaQuery.of(context).size.height*0.61,
+              //height: MediaQuery.of(context).size.height*0.67,
               width: MediaQuery.of(context).size.width,
-            //padding: EdgeInsets.only(top: 0.01),
+            padding: EdgeInsets.only(left: 10),
             //),
           child:  ListView(
               shrinkWrap: true,
               //physics: NeverScrollableScrollPhysics(),
               children: [
+                Padding(padding: EdgeInsets.only(left: 10)),
                 Text("Email Address",style: TextStyle(fontSize: 25,color: Colors.orange),),
                 TextField(
+                  //scrollPadding: EdgeInsets.only(left: 20),
                   decoration: InputDecoration(
+                    //contentPadding: EdgeInsets.only(left: 10),
                     hintText: "Enter Your Email Address",
                     //labelText: "Email Address",
                     labelStyle: TextStyle(
@@ -62,37 +74,87 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 30,
                             color: Colors.orange
                         ))),
-                Text("Web Server URL",style: TextStyle(fontSize: 25,color: Colors.orange),),
-                TextField(
-                    decoration: InputDecoration(
-                      hintText: "Enter web server URL",
-                      //labelText: "Password",
-                        labelStyle: TextStyle(
-                            fontSize: 30,
-                            color: Colors.orange
-                        ))),
-                Text("Number of Cached Items",style: TextStyle(fontSize: 22,color: Colors.orange),),
-                //Text("Number of Cached Items",style: TextStyle(fontSize: 22,color: Colors.orange,fontWeight: FontWeight.w500),),
-                TextField(
-                    decoration: InputDecoration(
-                      //labelText: "Password",
-                        labelStyle: TextStyle(
-                            fontSize: 30,
-                            color: Colors.orange
-                        ))),
-               Padding(padding: EdgeInsets.only(bottom: 7),),
-               Text("Remember Me",style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic,color: Colors.orange)),
-                //Switch(va, onChanged: null)
-                Padding(padding: EdgeInsets.only(top: 5)),
-               //Switch(value: false),// onChanged: null)
+                /*Visibility(
+                  visible: isVisible,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Web Server URL",style: TextStyle(fontSize: 25,color: Colors.orange),),
+                  //Padding(padding: EdgeInsets.only(left: 20)),
+
+                  TextField(
+                      decoration: InputDecoration(
+                        hintText: "Enter web server URL",
+                        //labelText: "Password",
+                          labelStyle: TextStyle(
+                              fontSize: 30,
+                              color: Colors.orange
+                          ))),]),
+                ),*/
+                Visibility(
+                  visible: isVisible,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Number of Cached Items",style: TextStyle(fontSize: 22,color: Colors.orange),),
+                  //Padding(padding: EdgeInsets.only(left: 20)),
+                  //Text("Number of Cached Items",style: TextStyle(fontSize: 22,color: Colors.orange,fontWeight: FontWeight.w500),),
+                  TextField(
+                      decoration: InputDecoration(
+                        //labelText: "Password",
+                          labelStyle: TextStyle(
+                              fontSize: 30,
+                              color: Colors.orange
+                          ))),
+               ]),
+                ),
+               //Padding(padding: EdgeInsets.only(bottom: 7),),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.start,
+                 crossAxisAlignment: CrossAxisAlignment.end,
+                 children: [
+                   Text("Remember Me",
+                       style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic,
+                           color: Colors.orange)),
+                   Padding(padding: EdgeInsets.only(right: 170,top: 40)),
+                   FlutterSwitch(value: isRemember, onToggle: (bool y){
+                     setState(() {
+                       //isVisible = s;
+                       isRemember = y;
+                     });
+                   },
+                     height: 30,
+                     width: 50,
+                     activeColor: Colors.green,
+                     padding: 2,
+                   )
+                   //materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,)
+                 ],
+               ),
                Divider(
                  color: Colors.black,
                ),
                //TextField(),
-               Text("Advanced Settings",style: TextStyle(fontSize: 20,fontStyle: FontStyle.italic,color: Colors.orange),),
-               //Switch(value: false)//, onChanged: false)
-               // Switch(value: false, onChanged: value(Container()) ) //value(Container container);
-            ]),
+               Row(
+                 children: [
+                   Text("Advanced Settings",
+                     style: TextStyle(fontSize: 20,fontStyle: FontStyle.italic,
+                         color: Colors.orange),),
+                   Padding(padding: EdgeInsets.only(right: 135,bottom: 40)),
+                    FlutterSwitch(value: isVisible, onToggle: (bool s){
+                       setState(() {
+                         isVisible = s;
+                       });
+                     },
+                      width: 50,
+                      height: 30,
+                      activeColor: Colors.green,
+                      padding: 2,
+                  )
+    ]
+               ),
+
+              ]),
     ),
             Padding(padding: EdgeInsets.only(bottom: 20)),
             Container(
@@ -103,62 +165,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5)
                 ),
-                color: Colors.deepOrange,
-                onPressed: null,
+                color: Colors.orange,
+                onPressed: (){
+                  AzureAuthOperations opr = AzureAuthOperations();
+                  opr.login();
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context)=>MarketPlace()),);
+                },
                 child: Text("Login",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w400)),
 
               ),
             )
-            /*RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)
-              ),
-              color: Colors.white,
-              onPressed: null, //{ Get.offAll(Login()); },
-              child: Text("Login",style: TextStyle(color: Colors.black,fontSize: 20),),
-            ),*/
-            //RaisedButton(onPressed: null,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1.0),),color: Colors.orange,),
     ],
     )
 
     );
   }
 }
-
-value(Container container) {
-  Container(
-  color: Colors.white,
-  //height: 400,
-  height: 50,
-  width: 50,
-  //padding: EdgeInsets.only(top: 0.01),
-  //),
-  child:  ListView(
-  shrinkWrap: true,
-  //physics: NeverScrollableScrollPhysics(),
-  children: [
-  Text("Email Address",style: TextStyle(fontSize: 25,color: Colors.orange),),
-  TextField(
-  decoration: InputDecoration(
-  hintText: "Enter Your Email Address",
-  //labelText: "Email Address",
-  labelStyle: TextStyle(
-  fontSize: 30,
-  color: Colors.orange
-  ),
-  ),
-  ),
-  Text("Password",style: TextStyle(fontSize: 25,color: Colors.orange),),
-  TextField(
-  decoration: InputDecoration(
-  //labelText: "Password",
-  labelStyle: TextStyle(
-  fontSize: 30,
-  color: Colors.orange
-  ))),
-  ]
-  )
-  );
-  return container;
-}
-     
